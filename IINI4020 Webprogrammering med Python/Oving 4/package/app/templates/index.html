@@ -1,0 +1,21 @@
+<!doctype html>
+<title>nyheter-skjema.html</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+<body>
+        <div>
+                <h1 class="tekst">Registrer en ny enhet</h1></br>
+                <p class="tekst">Overskrift som nyheten skal ha:</p>
+                <input type="text" name="overskrift"></input></br>
+                <p class="tekst">Skriv inn selve nyheten:</p>
+                <textarea rows="4" cols="50" placeholder="Skriv her" name="innhold"> </textarea></br>
+                <p class="tekst">Publisert av:</p>
+                <select name="forfatter" class=tekst>
+                        <option value="svend_andreas">Svend Andreas</option>
+                        <option value="walter">Walter</option>
+                        <option value="per">Per</option>
+                        <option value="grethe">Grethe</option>
+                </select>
+                <button type="lagre" class=tekst>Lagre nyheten</button>
+        </div>
+</body>
+</html>

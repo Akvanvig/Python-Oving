@@ -1,0 +1,37 @@
+body {
+        background-color: lightgrey;
+}
+
+div {
+        padding-top: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 50px;
+}
+
+.tekst {
+        font-family:Verdana;
+}
+
+button.tekst {
+        color: white;
+        background-color: blue;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 8px;
+        padding-right: 8px;
+        border-radius: 8px;
+        font-weight: bold;
+}
+
+select.tekst {
+        color: white;
+        background-color: blue;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 8px;
+        padding-right: 8px;
+        border-radius: 8px;
+        border-radius: 8px;
+        font-weight: bold;
+}

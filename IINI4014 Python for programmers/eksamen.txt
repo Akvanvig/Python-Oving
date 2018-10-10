@@ -1,0 +1,5 @@
+1. ord pr. setning
+2. Antall ord brukt ofte (f.eks. mer enn 10 ganger)
+3. Antall ord brukt sjeldent (f.eks. mindre enn 3 ganger)
+4. antall unike ord delt på totalt antall ord
+5. setninger pr. paragraf (ny setning ved hvert punktum, ny paragraf ved enter)
