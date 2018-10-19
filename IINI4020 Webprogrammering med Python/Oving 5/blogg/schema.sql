@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS nyheter;
+CREATE TABLE nyheter (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  tittel TEXT NOT NULL,
+  nyhet TEXT NOT NULL,
+  forfatter TEXT NOT NULL
+);

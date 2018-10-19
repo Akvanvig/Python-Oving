@@ -1,0 +1,36 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+        Innlogging
+{% endblock %}
+
+{% block style %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+<div class="contain">
+<nav class="navbar navbar-default navbar-fixed-top">
+        <a href="{{ url_for('index') }}"><button class="btn .navbar-btn">Blogg</button></a>
+        <a href="{{ url_for('opprett_artikkel') }}"><button class="btn .navbar-btn">Opprett artikkel</button></a>
+        <a href="{{ url_for('login') }}" ><button class="btn .navbar-right">Logg inn</button></a>
+</nav>
+</div>
+{% endblock %}
+{% block content %}
+<div class="main container" style="padding-top: 50px;">
+        <h1 class="tekst">Registrer nyhet</h1></br>
+        <form action="{{ url_for('opprett_artikkel') }}" method="post">
+                <dl>
+                        {{ form.csrf_token }}
+                        {{ wtf.form_field(form.tittel) }}
+                        {{ wtf.form_field(form.innhold) }}
+                        {{ wtf.form_field(form.forfatter) }}
+                        <dd><button type="submit" class=tekst>Publiser nyheten</button>
+                </dl>
+        <form>
+</div>
+{% endblock %}

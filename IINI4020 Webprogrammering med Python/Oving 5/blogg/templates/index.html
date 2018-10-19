@@ -1,0 +1,27 @@
+<!doctype html>
+<title>nyheter-skjema.html</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+<body>
+        <div>
+                <h1 class="tekst">Registrer nyhet</h1></br>
+                <form action="{{ url_for('add_entry') }}" method="post" class="add_entry">
+                        <dl>
+                                <dt>Overskrift:
+                                <dd><input type="text" name="tittel"></input>
+                                <dt>Innhold av nyheten:
+                                <dd><textarea rows="4" cols="50" placeholder="Skriv her" name="nyhet"> </textarea>
+                                <dt>forfatter:
+                                <dd><input type=text name=forfatter>
+                                <dd><button type="submit" class=tekst>Publiser nyheten</button>
+                        </dl>
+                <form>
+                <ul class=entries>
+                        {% for entry in entries %}
+                                <li><h3>{{ entry.tittel }}</h3>{{ entry.nyhet|safe }}</br><em> - {{ entry.forfatter}}</em>
+                        {% else %}
+                                <li><em>No entries yet. Add some!</em>
+                        {% endfor %}
+                </ul>
+        </div>
+</body>
+</html>

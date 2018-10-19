@@ -1,0 +1,34 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+        Blogg
+{% endblock %}
+
+{% block style %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+<div class="contain">
+<nav class="navbar navbar-default navbar-fixed-top">
+        <a href="{{ url_for('index') }}"><button class="btn .navbar-btn">Blogg</button></a>
+        <a href="{{ url_for('opprett_artikkel') }}"><button class="btn .navbar-btn">Opprett artikkel</button></a>
+        <a href="{{ url_for('login') }}" ><button class="btn .navbar-right">Logg inn</button></a>
+</nav>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="main container" style="padding-top: 50px;">
+        <h1>Nyheter</h1>
+        <ul class=entries>
+                {% for entry in entries %}
+                        <li><h3>{{ entry.tittel }}</h3>{{ entry.nyhet|safe }}</br><em> - {{ entry.forfatter}}</em>
+                {% else %}
+                        <li><em>No entries yet. Add some!</em>
+                {% endfor %}
+        </ul>
+</div>
+{% endblock %}
