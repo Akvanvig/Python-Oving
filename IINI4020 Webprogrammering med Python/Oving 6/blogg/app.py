@@ -109,10 +109,11 @@ def header():
 def innlogging():
         try:
             if session['innlogget'] == None:
-                session['innlogget'] = 0
+                pass
         except Exception as e:
             session['innlogget'] = 0
-        return render_template('innlogging.html', innlogget=session['innlogget'])
+            session['brukernavn'] = ''
+        return render_template('innlogging.html', innlogget=session['innlogget'], brukernavn=session['brukernavn'])
 
 
 
