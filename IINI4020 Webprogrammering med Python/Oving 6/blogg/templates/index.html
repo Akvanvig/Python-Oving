@@ -1,24 +1,33 @@
 {% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
 
 {% block title %}
         Blogg
 {% endblock %}
+
 
 {% block style %}
 {{ super() }}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 {% endblock %}
 
+
+{% block scripts %}
+{{ super() }}
+<script>
+$(function(){
+    $("#headerContent").load("{{ url_for('header') }}");
+});
+</script>
+{% endblock %}
+
+
 {% block head %}
 {{ super() }}
-<div class="contain">
-<nav class="navbar navbar-default navbar-fixed-top">
-        <a href="{{ url_for('index') }}"><button class="btn .navbar-btn">Blogg</button></a>
-        <a href="{{ url_for('opprett_artikkel') }}"><button class="btn .navbar-btn">Opprett artikkel</button></a>
-        <a href="{{ url_for('login') }}" ><button class="btn .navbar-right">Logg inn</button></a>
-</nav>
-</div>
+<div id="headerContent"></div>
 {% endblock %}
+
 
 {% block content %}
 <div class="main container" style="padding-top: 50px;">
@@ -26,6 +35,16 @@
         <ul class=entries>
                 {% for entry in entries %}
                         <li><h3>{{ entry.tittel }}</h3>{{ entry.nyhet|safe }}</br><em> - {{ entry.forfatter}}</em>
+                {% else %}
+                        <li><em>No entries yet. Add some!</em>
+                {% endfor %}
+        </ul>
+</div>
+<div class="container">
+        <h1>brukere</h1>
+        <ul class=Liste>
+                {% for rad in rader %}
+                        <li>id:  {{ rad.id }}&emsp;&emsp;navn:  {{ rad.navn|safe }}&emsp;&emsp;Pass:{{ rad.passord}}
                 {% else %}
                         <li><em>No entries yet. Add some!</em>
                 {% endfor %}

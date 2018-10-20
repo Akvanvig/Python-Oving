@@ -1,10 +1,9 @@
-
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
 
 {% block title %}
-        Innlogging
+        Opprett bruker
 {% endblock %}
 
 
@@ -32,22 +31,23 @@ $(function(){
 
 {% block content %}
 <div class="main container" style="padding-top: 50px;">
-        <form action="/login" method="post">
+        <form action="/opprett_bruker" method="post">
                 <dl>
                         <dt>{{ form.csrf_token}}
                         <dt>{{ wtf.form_field(form.brukernavn) }}
                         <dt>{{ wtf.form_field(form.passord) }}
+                        <dt>{{ wtf.form_field(form.gjenta) }}
                         <dd><input type="submit" class="btn btn-primary" value="login">
                 </dl>
+                {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                                <ul class="flashes">
+                                        {% for message in messages %}
+                                                <li>{{ message }}</li>
+                                        {% endfor %}
+                                </ul>
+                        {% endif %}
+                {% endwith %}
         </form>
-        {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                        <ul class="flashes">
-                                {% for message in messages %}
-                                        <li>{{ message }}</li>
-                                {% endfor %}
-                        </ul>
-                {% endif %}
-        {% endwith %}
 </div>
 {% endblock %}

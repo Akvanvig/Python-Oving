@@ -1,0 +1,5 @@
+{% if innlogget == 1 %}
+        <li><a href="{{ url_for('logg_ut') }}">Logg ut</a></li>
+{% elif innlogget == 0 %}
+        <li><a href="{{ url_for('login') }}">Logg inn</a></li>
+{% endif %}
