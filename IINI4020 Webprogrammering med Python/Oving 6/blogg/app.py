@@ -25,7 +25,7 @@ app.config.from_object(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
         db = get_db()
-        cur = db.execute('SELECT n.tittel AS tittel, n.nyhet AS nyhet, b.navn AS forfatter FROM nyheter n JOIN brukere b ON n.forfatter_id = b.id ORDER BY n.id DESC')
+        cur = db.execute('SELECT n.id AS id, n.tittel AS tittel, n.nyhet AS nyhet, b.navn AS forfatter FROM nyheter n JOIN brukere b ON n.forfatter_id = b.id ORDER BY n.id DESC')
         entries = cur.fetchall()
         cur = db.execute('SELECT * FROM brukere')
         res = cur.fetchall()
@@ -49,7 +49,7 @@ def opprett_artikkel():
                 db.commit()
                 flash('innlegget ble sendt og lagret i databasen')
                 return redirect(url_for('index'))
-        return render_template('opprett_artikkel.html', form=form)
+        return render_template('opprett_artikkel.html', form=form, brukernavn=session['brukernavn'])
 
 
 #Viser innloggingsskjema til bruker, og logger dem inn.
@@ -65,7 +65,6 @@ def login():
                 if int(rad) > 0:
                         session['brukernavn'] = brukernavn
                         session['passord'] = passord
-                        session['innlogget'] = 1
                         return redirect(url_for('index'))
                 flash('Feil brukernavn eller passord')
         return render_template('login.html', form=form)
@@ -88,7 +87,6 @@ def opprett_bruker():
                     db.commit()
                     session['passord'] = passord
                     session['brukernavn'] = brukernavn
-                    session['innlogget'] = 1
                     flash('brukeren ble lagret i databasen')
                     return redirect(url_for('index'))
                 flash('Brukeren eksisterer allerede')
@@ -96,26 +94,39 @@ def opprett_bruker():
 
 @app.route('/logg_ut')
 def logg_ut():
-    session.pop('brukernavn')
     session.pop('passord')
-    session['innlogget'] = 0
+    session.pop('brukernavn')
     return redirect(url_for('index'))
 
 @app.route('/header')
 def header():
     return render_template('header.html')
 
+#Sørger for at riktig innloggingsinfo blir vist til bruker (logg inn/logg ut knapp osv.) i header
 @app.route('/innlogging')
 def innlogging():
+        if 'brukernavn' not in session:
+            brukernavn = ''
+        else:
+            brukernavn = session['brukernavn']
+        return render_template('innlogging.html', brukernavn=brukernavn)
+
+#Sletter en post fra databasen, blir kallt av JQuery (Ajax) på index-sida
+@app.route('/delete/<post_id>', methods=['GET'])
+def delete_entry(post_id):
+    resultat = { 'status':0, 'message': 'Error'}
+    if 'brukernavn' not in session:
+        resultat = {'status':0, 'message': 'Ikke innlogget'}
+    else:
         try:
-            if session['innlogget'] == None:
-                pass
+            db = get_db()
+            db.execute('DELETE FROM nyheter WHERE id = ?', [post_id])
+            db.commit()
+            resultat = {'status':1, 'message': 'Post Slettet'}
         except Exception as e:
-            session['innlogget'] = 0
-            session['brukernavn'] = ''
-        return render_template('innlogging.html', innlogget=session['innlogget'], brukernavn=session['brukernavn'])
+            resultat = { 'status':0, 'message': repr(e) }
 
-
+    return jsonify(resultat)
 
 #Database-----------------------------------------------------------------------------------------
 #Oppretter databasen

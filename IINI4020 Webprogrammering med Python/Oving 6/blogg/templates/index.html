@@ -20,6 +20,7 @@ $(function(){
     $("#headerContent").load("{{ url_for('header') }}");
 });
 </script>
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
 {% endblock %}
 
 
@@ -34,7 +35,7 @@ $(function(){
         <h1>Nyheter</h1>
         <ul class=entries>
                 {% for entry in entries %}
-                        <li><h3>{{ entry.tittel }}</h3>{{ entry.nyhet|safe }}</br><em> - {{ entry.forfatter}}</em>
+                        <li class="entry"><h3 id={{ entry.id }}>{{ entry.tittel }}</h3>{{ entry.nyhet|safe }}</br><em> - {{ entry.forfatter}}</em>
                 {% else %}
                         <li><em>No entries yet. Add some!</em>
                 {% endfor %}

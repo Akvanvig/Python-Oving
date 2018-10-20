@@ -1,6 +1,6 @@
-{% if innlogget == 1 %}
+{% if brukernavn != '' %}
         <li class="nav navbar-nav"><a>Logget Inn som {{ brukernavn }}</a></li>
         <li class="nav navbar-nav"><a href="{{ url_for('logg_ut') }}">Logg ut</a></li>
-{% elif innlogget != 1 %}
+{% else %}
         <li class="nav navbar-nav"><a href="{{ url_for('login') }}">Logg inn</a></li>
 {% endif %}
