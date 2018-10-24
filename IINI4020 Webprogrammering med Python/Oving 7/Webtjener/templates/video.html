@@ -1,0 +1,15 @@
+{% extends 'basePlayer.html' %}
+{% block play %}
+
+<h3> {{ title }} </h3>
+
+<video width="320" height="240" controls="">
+
+        <source src="{{ url_for('static', filename='video/' + video_file) }}" type="video/mp4">
+        <source src="{{ url_for('static', filename='video/' + video_file_ogg) }}" type="video/ogg">
+
+        Beklager, din nettleser støtter ikke HTML5 video
+
+</video>
+
+{% endblock %}

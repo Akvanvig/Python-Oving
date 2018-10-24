@@ -1,0 +1,24 @@
+{% extends "basePlayer.html" %}
+
+{% block title %}
+        {{ title }}
+{% endblock %}
+
+{% block content %}
+<h2>Videoer</h2>
+<ul class=videoer>
+        {% for video in video_files %}
+                <li class="video"><a href="/video/{{ video }}">{{ video }}</a>
+        {% else %}
+                <li><em>Ingen mp4-filer lagt til, legg noen i Webtjener/static/video!</em>
+        {% endfor %}
+</ul>
+<h2>SVG-filer</h2>
+<ul class="svg">
+        {% for svg in svg_files %}
+                <li><a href="/svg/{{ svg }}">{{ svg }}</a>
+        {% else %}
+                <li><em>Ingen svg-filer lagt til, legg noen i Webtjener/templates!</em>
+        {% endfor %}
+</ul>
+{% endblock %}

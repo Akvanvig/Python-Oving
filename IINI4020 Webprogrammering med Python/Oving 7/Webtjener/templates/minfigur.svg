@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="410" height="350">
+  <!-- blått kvadrat med avrundede hjørner -->
+  <rect x="50" y="20" rx="20" ry="20" width="150" height="150" fill="blue" stroke="black" stroke-width="2" opacity="0.5">
+    <animateMotion path="M 0 0 L 200 0 L 0 0" dur="6s" fill="freeze" repeatCount="indefinite"/>
+
+    <animate attributeName="fill" attributType="CSS" from="blue" to="Yellow" dur="3s"/>
+    <animate attributeName="fill" attributType="CSS" from="Yellow" to="blue" begin="3s" dur="3s"/>
+
+  </rect>
+
+  <!-- rød sirkel med senter midt i kvadratet -->
+  <circle cx="125" cy="95" r="75" fill="red" stroke="black" stroke-width="2">
+    <animateMotion path="M 0 0 L 0 200 L 0 0" dur="6s" fill="freeze" repeatCount="indefinite"/>
+
+    <animate attributeName="fill" attributType="CSS" from="red" to="Yellow" dur="3s"/>
+    <animate attributeName="fill" attributType="CSS" from="Yellow" to="red" begin="3s" dur="3s"/>
+
+  </circle>
+
+  <!-- Grønn trekant basert på tre punkter -->
+  <polygon points="200,20 170,260 400,300" fill="green" stroke="black" stroke-width="2" >
+    <animateMotion path="M 0 0 L -200 -20 L 0 0" dur="6s" fill="freeze" repeatCount="indefinite"/>
+
+    <animate attributeName="fill" attributType="CSS" from="green" to="Yellow" dur="3s"/>
+    <animate attributeName="fill" attributType="CSS" from="Yellow" to="Green" begin="3s" dur="3s"/>
+
+  </polygon>
+
+</svg>
